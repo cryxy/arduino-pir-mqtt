@@ -3,13 +3,7 @@
 #include "PropertiesReader.h"
 #include "config.h"
 
-int bewegung = 7;        //Das Wort „bewegung“ steht jetzt für den Wert 7.
 int bewegungsstatus = 0; //Das Wort „bewegungsstatus“ steht jetzt zunächst für den Wert 0. Später wird unter dieser Variable gespeichert, ob eine Bewegung erkannt wird oder nicht.
-
-// Enter a MAC address and IP address for your controller below.
-// The IP address will be dependent on your local network:
-byte mac[] = {
-    0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 
 EthernetClient ethClient;
 PubSubClient mqttClient;
@@ -23,7 +17,7 @@ void setup()
   // put your setup code here, to run once:
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(bewegung, INPUT); //Der Pin mit dem Bewegungsmelder (Pin 7) ist jetzt ein Eingang.
+  pinMode(PIN_PIR, INPUT); //Der Pin mit dem Bewegungsmelder (Pin 7) ist jetzt ein Eingang.
 
   Serial.begin(9600);
 
@@ -88,11 +82,11 @@ void setup()
 
 void loop()
 {
-  if (digitalRead(bewegung) != bewegungsstatus)
+  if (digitalRead(PIN_PIR) != bewegungsstatus)
   {
     // Aenderung erkannt
     Serial.println("bewegungstatus changed.");
-    bewegungsstatus = digitalRead(bewegung); //ier wird der Pin7 ausgelesen. Das Ergebnis wird unter der Variablen „bewegungsstatus“ mit dem Wert „HIGH“ für 5Volt oder „LOW“ für 0Volt gespeichert.
+    bewegungsstatus = digitalRead(PIN_PIR); //ier wird der Pin7 ausgelesen. Das Ergebnis wird unter der Variablen „bewegungsstatus“ mit dem Wert „HIGH“ für 5Volt oder „LOW“ für 0Volt gespeichert.
     if (bewegungsstatus == HIGH)             //Verarbeitung: Wenn eine Bewegung detektiert wird (Das Spannungssignal ist hoch)
     {                                        //Programmabschnitt des IF-Befehls öffnen.
       digitalWrite(LED_BUILTIN, HIGH);       //dann soll der Piezo piepsen.
