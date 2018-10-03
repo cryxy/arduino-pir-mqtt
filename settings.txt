@@ -1,0 +1,5 @@
+$mqttServer=192.168.x.x;
+$mqttUser=mqtt;
+$mqttPassword=password;
+$mqttClientName=ArduinoPIR;
+$mqttTopic=openhab/Pir_Wohn/;
